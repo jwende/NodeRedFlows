@@ -10,7 +10,7 @@
 		"y": 220,
 		"wires": [
 			[
-				"8c674d9a.9bf5e8"
+				"cf9e19b8.347b7"
 			]
 		]
 	},
@@ -152,5 +152,19 @@
 				"9f86a8fc.e916e8"
 			]
 		]
+	},
+	{
+		"id": "cf9e19b8.347b7",
+		"type": "debug",
+		"z": "1776eb26.fe934d",
+		"name": "",
+		"active": true,
+		"tosidebar": true,
+		"console": false,
+		"tostatus": false,
+		"complete": "false",
+		"x": 800,
+		"y": 100,
+		"wires": []
 	}
 ]
