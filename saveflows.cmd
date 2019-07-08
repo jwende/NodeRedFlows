@@ -1,3 +1,4 @@
-cd C:\2_Git\NodeREDFlows
+rem cd C:\2_Git\NodeREDFlows
 git add .
-git commit -m "$1"
+git commit -m %1
+git push

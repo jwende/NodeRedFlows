@@ -54,15 +54,15 @@
 		"id": "ac9a96b4.e0da3",
 		"type": "exec",
 		"z": "1776eb26.fe934d",
-		"command": "C:\\Users\\JoergWende\\saveflows.cmd",
+		"command": "C:\\2_Git\\NodeREDFlows\\saveflows.cmd",
 		"addpay": true,
 		"append": "",
 		"useSpawn": "false",
 		"timer": "",
 		"oldrc": false,
 		"name": "git-commit",
-		"x": 690,
-		"y": 260,
+		"x": 670,
+		"y": 240,
 		"wires": [
 			[
 				"3bb53b29.868484"
