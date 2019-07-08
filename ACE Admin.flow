@@ -1,0 +1,200 @@
+[
+	{
+		"id": "61000f0f.07cd28",
+		"type": "ui_button",
+		"z": "509db931.039a88",
+		"name": "",
+		"group": "c59e6a59.32496",
+		"order": 1,
+		"width": 0,
+		"height": 0,
+		"passthru": false,
+		"label": "Start",
+		"tooltip": "",
+		"color": "",
+		"bgcolor": "green",
+		"icon": "",
+		"payload": "",
+		"payloadType": "str",
+		"topic": "",
+		"x": 130,
+		"y": 200,
+		"wires": [
+			[
+				"4cb10112.94333"
+			]
+		]
+	},
+	{
+		"id": "4cb10112.94333",
+		"type": "http request",
+		"z": "509db931.039a88",
+		"name": "",
+		"method": "POST",
+		"ret": "txt",
+		"paytoqs": false,
+		"url": "http://localhost:4415/apiv2/servers/server2/start",
+		"tls": "",
+		"proxy": "",
+		"authType": "basic",
+		"x": 360,
+		"y": 220,
+		"wires": [
+			[
+				"c31a76e7.2825b8",
+				"86ea0411.f03028",
+				"19fcd5cf.24587a"
+			]
+		]
+	},
+	{
+		"id": "cb92d8df.50a0c",
+		"type": "ui_button",
+		"z": "509db931.039a88",
+		"name": "",
+		"group": "c59e6a59.32496",
+		"order": 2,
+		"width": 0,
+		"height": 0,
+		"passthru": false,
+		"label": "Stop",
+		"tooltip": "",
+		"color": "",
+		"bgcolor": "red",
+		"icon": "",
+		"payload": "",
+		"payloadType": "str",
+		"topic": "",
+		"x": 130,
+		"y": 320,
+		"wires": [
+			[
+				"8b0d20d6.687ee"
+			]
+		]
+	},
+	{
+		"id": "8b0d20d6.687ee",
+		"type": "http request",
+		"z": "509db931.039a88",
+		"name": "",
+		"method": "POST",
+		"ret": "txt",
+		"paytoqs": false,
+		"url": "http://localhost:4415/apiv2/servers/server2/stop",
+		"tls": "",
+		"proxy": "",
+		"authType": "basic",
+		"x": 350,
+		"y": 320,
+		"wires": [
+			[
+				"c31a76e7.2825b8",
+				"86ea0411.f03028",
+				"19fcd5cf.24587a"
+			]
+		]
+	},
+	{
+		"id": "c31a76e7.2825b8",
+		"type": "debug",
+		"z": "509db931.039a88",
+		"name": "",
+		"active": false,
+		"tosidebar": true,
+		"console": false,
+		"tostatus": false,
+		"complete": "false",
+		"x": 660,
+		"y": 280,
+		"wires": []
+	},
+	{
+		"id": "a313e839.67654",
+		"type": "ui_button",
+		"z": "509db931.039a88",
+		"name": "",
+		"group": "c59e6a59.32496",
+		"order": 3,
+		"width": 0,
+		"height": 0,
+		"passthru": false,
+		"label": "Get Servers",
+		"tooltip": "",
+		"color": "",
+		"bgcolor": "",
+		"icon": "",
+		"payload": "",
+		"payloadType": "str",
+		"topic": "",
+		"x": 150,
+		"y": 420,
+		"wires": [
+			[
+				"b2516997.2a0c6"
+			]
+		]
+	},
+	{
+		"id": "86ea0411.f03028",
+		"type": "ui_template",
+		"z": "509db931.039a88",
+		"group": "c59e6a59.32496",
+		"name": "",
+		"order": 4,
+		"width": "6",
+		"height": "10",
+		"format": "    <div class=\"box box-default\">\n        <code>\n            <pre>{{msg.payload |json}}</pre>\n        </code>\n    </div>",
+		"storeOutMessages": true,
+		"fwdInMessages": true,
+		"templateScope": "local",
+		"x": 680,
+		"y": 420,
+		"wires": [
+			[]
+		]
+	},
+	{
+		"id": "b2516997.2a0c6",
+		"type": "http request",
+		"z": "509db931.039a88",
+		"name": "",
+		"method": "GET",
+		"ret": "obj",
+		"paytoqs": false,
+		"url": "http://localhost:4415/apiv2/servers",
+		"tls": "",
+		"proxy": "",
+		"authType": "basic",
+		"x": 360,
+		"y": 420,
+		"wires": [
+			[
+				"86ea0411.f03028"
+			]
+		]
+	},
+	{
+		"id": "19fcd5cf.24587a",
+		"type": "delay",
+		"z": "509db931.039a88",
+		"name": "",
+		"pauseType": "delay",
+		"timeout": "10",
+		"timeoutUnits": "seconds",
+		"rate": "1",
+		"nbRateUnits": "1",
+		"rateUnits": "second",
+		"randomFirst": "1",
+		"randomLast": "5",
+		"randomUnits": "seconds",
+		"drop": false,
+		"x": 370,
+		"y": 500,
+		"wires": [
+			[
+				"b2516997.2a0c6"
+			]
+		]
+	}
+]

@@ -1,0 +1,656 @@
+[
+	{
+		"id": "4fe1cdf5.118674",
+		"type": "mqtt out",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"topic": "/OPCUA_MQTT_Test/temperature",
+		"qos": "0",
+		"retain": "false",
+		"broker": "5557e6c8.0b7a88",
+		"x": 1120,
+		"y": 300,
+		"wires": []
+	},
+	{
+		"id": "f7506a3c.4245a",
+		"type": "OPCUA-IIoT-Result-Filter",
+		"z": "5a99113f.6ad25",
+		"nodeId": "ns=1;s=fbMachine1Temperature",
+		"datatype": "Double",
+		"fixedValue": false,
+		"fixPoint": 2,
+		"withPrecision": false,
+		"precision": 2,
+		"entry": 1,
+		"justValue": true,
+		"withValueCheck": false,
+		"minvalue": "",
+		"maxvalue": "",
+		"defaultvalue": "",
+		"topic": "",
+		"name": "",
+		"showErrors": false,
+		"x": 550,
+		"y": 300,
+		"wires": [
+			[
+				"4fe1cdf5.118674",
+				"22c54d00.d88c64",
+				"a2d4e471.c6b46"
+			]
+		]
+	},
+	{
+		"id": "9df04d54.0ceee8",
+		"type": "mqtt in",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"topic": "/OPCUA_MQTT_Test/temperature",
+		"qos": "0",
+		"broker": "5557e6c8.0b7a88",
+		"x": 160,
+		"y": 640,
+		"wires": [
+			[
+				"c5dea1c5.95bbb8",
+				"1d58889e.c2f79f"
+			]
+		]
+	},
+	{
+		"id": "c5dea1c5.95bbb8",
+		"type": "ui_numeric",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"label": "Current Operating Temperature Example 1",
+		"group": "987c3c1e.a7c2e",
+		"order": 0,
+		"width": 0,
+		"height": 0,
+		"passthru": true,
+		"topic": "",
+		"format": "{{value}}",
+		"min": 0,
+		"max": 10,
+		"step": ".1",
+		"x": 550,
+		"y": 664,
+		"wires": [
+			[]
+		]
+	},
+	{
+		"id": "d37c7fe5.e7885",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "MSB - OT Machine Data Acquisition Example 1+2",
+		"info": "",
+		"x": 200,
+		"y": 240,
+		"wires": []
+	},
+	{
+		"id": "1501cc96.a2b78b",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "MSB - IT Interface Call Example 1",
+		"info": "",
+		"x": 1080,
+		"y": 240,
+		"wires": []
+	},
+	{
+		"id": "34d1d763.883298",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "IT Dashboard -> provided by ContiTech",
+		"info": "",
+		"x": 170,
+		"y": 564,
+		"wires": []
+	},
+	{
+		"id": "4adf5a22.233474",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "OT OPC UA Server Example 1-3 -> provided by ContiTech",
+		"info": "",
+		"x": 230,
+		"y": 100,
+		"wires": []
+	},
+	{
+		"id": "c7136efc.1543f8",
+		"type": "OPCUA-IIoT-Inject",
+		"z": "5a99113f.6ad25",
+		"injectType": "listen",
+		"payload": "1000",
+		"payloadType": "num",
+		"topic": "",
+		"repeat": "",
+		"crontab": "",
+		"once": true,
+		"startDelay": "5",
+		"name": "fbMachine1",
+		"addressSpaceItems": [
+			{
+				"name": "greenLED",
+				"nodeId": "ns=1;s=fbMachine1Temperature",
+				"datatypeName": ""
+			}
+		],
+		"x": 110,
+		"y": 300,
+		"wires": [
+			[
+				"6bbda628.f1bb68"
+			]
+		]
+	},
+	{
+		"id": "6bbda628.f1bb68",
+		"type": "OPCUA-IIoT-Listener",
+		"z": "5a99113f.6ad25",
+		"connector": "1feef7d1.eb4fa8",
+		"action": "subscribe",
+		"queueSize": 10,
+		"name": "OPC UA Listener",
+		"justValue": true,
+		"showStatusActivities": false,
+		"showErrors": false,
+		"x": 297,
+		"y": 300,
+		"wires": [
+			[
+				"f7506a3c.4245a"
+			]
+		]
+	},
+	{
+		"id": "22c54d00.d88c64",
+		"type": "switch",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"property": "payload",
+		"propertyType": "msg",
+		"rules": [
+			{
+				"t": "gte",
+				"v": "26",
+				"vt": "num"
+			}
+		],
+		"checkall": "true",
+		"repair": false,
+		"outputs": 1,
+		"x": 790,
+		"y": 392,
+		"wires": [
+			[
+				"ea35c112.9ca8d"
+			]
+		]
+	},
+	{
+		"id": "ea35c112.9ca8d",
+		"type": "mqtt out",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"topic": "/OPCUA_MQTT_Test/exceededTemperature",
+		"qos": "0",
+		"retain": "false",
+		"broker": "5557e6c8.0b7a88",
+		"x": 1107,
+		"y": 392,
+		"wires": []
+	},
+	{
+		"id": "460c29f9.c95dc",
+		"type": "mqtt in",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"topic": "/OPCUA_MQTT_Test/exceededTemperature",
+		"qos": "0",
+		"broker": "5557e6c8.0b7a88",
+		"x": 190,
+		"y": 720,
+		"wires": [
+			[
+				"1466f9ec.ad0b6e"
+			]
+		]
+	},
+	{
+		"id": "ef388eb2.437928",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "MSB - Workflow Connection Between OT and IT -> In Focus of the MSB tool supplier",
+		"info": "",
+		"x": 310,
+		"y": 200,
+		"wires": []
+	},
+	{
+		"id": "ae6481de.f2b7a",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "MSB - Rule Engine Example 2",
+		"info": "",
+		"x": 859,
+		"y": 352,
+		"wires": []
+	},
+	{
+		"id": "1466f9ec.ad0b6e",
+		"type": "function",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"func": "var today = new Date().toLocaleString();\nmsg.payload = \"Temperature with \"+msg.payload+\" ° Celsius exceeded at \"+today; \nreturn msg;",
+		"outputs": 1,
+		"noerr": 0,
+		"x": 450,
+		"y": 720,
+		"wires": [
+			[
+				"2b558d9.b388f72",
+				"55205a8f.6d67d4"
+			]
+		]
+	},
+	{
+		"id": "55205a8f.6d67d4",
+		"type": "ui_toast",
+		"z": "5a99113f.6ad25",
+		"position": "top right",
+		"displayTime": "3",
+		"highlight": "",
+		"outputs": 0,
+		"ok": "OK",
+		"cancel": "",
+		"topic": "",
+		"name": "Alarm Message Example 3",
+		"x": 700,
+		"y": 745,
+		"wires": []
+	},
+	{
+		"id": "1d58889e.c2f79f",
+		"type": "ui_chart",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"group": "987c3c1e.a7c2e",
+		"order": 0,
+		"width": 0,
+		"height": 0,
+		"label": "Operating Temperature Example 1",
+		"chartType": "line",
+		"legend": "false",
+		"xformat": "HH:mm:ss",
+		"interpolate": "linear",
+		"nodata": "",
+		"dot": false,
+		"ymin": "",
+		"ymax": "",
+		"removeOlder": 1,
+		"removeOlderPoints": "",
+		"removeOlderUnit": "3600",
+		"cutout": 0,
+		"useOneColor": false,
+		"colors": [
+			"#1F77B4",
+			"#AEC7E8",
+			"#FF7F0E",
+			"#2CA02C",
+			"#98DF8A",
+			"#D62728",
+			"#FF9896",
+			"#9467BD",
+			"#C5B0D5"
+		],
+		"useOldStyle": false,
+		"outputs": 2,
+		"x": 520,
+		"y": 624,
+		"wires": [
+			[],
+			[]
+		]
+	},
+	{
+		"id": "2b558d9.b388f72",
+		"type": "ui_text",
+		"z": "5a99113f.6ad25",
+		"group": "987c3c1e.a7c2e",
+		"order": 0,
+		"width": 0,
+		"height": 0,
+		"name": "",
+		"label": "Last Alarm Message Example 2",
+		"format": "{{msg.payload}}",
+		"layout": "row-spread",
+		"x": 710,
+		"y": 705,
+		"wires": []
+	},
+	{
+		"id": "23d5cff.3ef453",
+		"type": "ui_form",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"label": "OT OPC UA Method Call Example 3",
+		"group": "7c005b6d.58f194",
+		"order": 0,
+		"width": 0,
+		"height": 0,
+		"options": [
+			{
+				"label": "Input 1",
+				"value": "value1",
+				"type": "number",
+				"required": true
+			},
+			{
+				"label": "Input 2",
+				"value": "value2",
+				"type": "number",
+				"required": false
+			}
+		],
+		"formValue": {
+			"value1": "",
+			"value2": ""
+		},
+		"payload": "",
+		"submit": "Submit",
+		"cancel": "Cancel",
+		"topic": "",
+		"x": 160,
+		"y": 800,
+		"wires": [
+			[
+				"ff324019.5b6408"
+			]
+		]
+	},
+	{
+		"id": "34d74314.5d92f4",
+		"type": "OPCUA-IIoT-Method-Caller",
+		"z": "5a99113f.6ad25",
+		"connector": "1feef7d1.eb4fa8",
+		"objectId": "ns=1;i=1001",
+		"methodId": "ns=1;i=1001",
+		"methodType": "basic",
+		"value": "",
+		"justValue": true,
+		"name": "OPC UA Method Caller",
+		"showStatusActivities": true,
+		"showErrors": true,
+		"inputArguments": [],
+		"x": 733,
+		"y": 480,
+		"wires": [
+			[
+				"ae64346a.6867"
+			]
+		]
+	},
+	{
+		"id": "b1aabf54.276fa8",
+		"type": "function",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"func": "msg.payload = {\n    objectId: 'ns=1;i=1000',\n    methodId: 'ns=1;i=1001',\n    inputArguments: [\n        {name: 'value1', dataType:'UInt32', value:msg.payload.value1},\n        {name: 'value2', dataType:'UInt32', value:msg.payload.value2}\n    ],\n    methodType: 'basic'\n}\nreturn msg;",
+		"outputs": 1,
+		"noerr": 0,
+		"x": 540,
+		"y": 480,
+		"wires": [
+			[
+				"34d74314.5d92f4"
+			]
+		]
+	},
+	{
+		"id": "f7c5b0b8.a04348",
+		"type": "function",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"func": "var resultValue = msg.payload[0].outputArguments[0].value[0];\nmsg.payload = resultValue;\nreturn msg;",
+		"outputs": 1,
+		"noerr": 0,
+		"x": 580,
+		"y": 860,
+		"wires": [
+			[
+				"eaaa4e72.9bfdb8"
+			]
+		]
+	},
+	{
+		"id": "ae64346a.6867",
+		"type": "json",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"property": "payload",
+		"action": "",
+		"pretty": false,
+		"x": 988,
+		"y": 480,
+		"wires": [
+			[
+				"1f635e25.9e3352"
+			]
+		]
+	},
+	{
+		"id": "205e9c4.220dee4",
+		"type": "json",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"property": "payload",
+		"action": "",
+		"pretty": false,
+		"x": 440,
+		"y": 860,
+		"wires": [
+			[
+				"f7c5b0b8.a04348"
+			]
+		]
+	},
+	{
+		"id": "1f635e25.9e3352",
+		"type": "mqtt out",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"topic": "/OPCUA_MQTT_Test/methodResponse",
+		"qos": "0",
+		"retain": "",
+		"broker": "5557e6c8.0b7a88",
+		"x": 1218,
+		"y": 480,
+		"wires": []
+	},
+	{
+		"id": "ff324019.5b6408",
+		"type": "mqtt out",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"topic": "/OPCUA_MQTT_Test/methodCall",
+		"qos": "0",
+		"retain": "",
+		"broker": "5557e6c8.0b7a88",
+		"x": 550,
+		"y": 800,
+		"wires": []
+	},
+	{
+		"id": "cbfcdfb1.de348",
+		"type": "mqtt in",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"topic": "/OPCUA_MQTT_Test/methodCall",
+		"qos": "0",
+		"datatype": "auto",
+		"broker": "5557e6c8.0b7a88",
+		"x": 120,
+		"y": 500,
+		"wires": [
+			[
+				"19459fa6.bc0ae8"
+			]
+		]
+	},
+	{
+		"id": "da6e4709.eb8a58",
+		"type": "mqtt in",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"topic": "/OPCUA_MQTT_Test/methodResponse",
+		"qos": "2",
+		"broker": "5557e6c8.0b7a88",
+		"x": 180,
+		"y": 860,
+		"wires": [
+			[
+				"205e9c4.220dee4"
+			]
+		]
+	},
+	{
+		"id": "eaaa4e72.9bfdb8",
+		"type": "ui_text_input",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"label": "Method Response Example 3",
+		"group": "7c005b6d.58f194",
+		"order": 0,
+		"width": 0,
+		"height": 0,
+		"passthru": true,
+		"mode": "text",
+		"delay": 300,
+		"topic": "",
+		"x": 820,
+		"y": 860,
+		"wires": [
+			[]
+		]
+	},
+	{
+		"id": "19459fa6.bc0ae8",
+		"type": "json",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"property": "payload",
+		"action": "",
+		"pretty": false,
+		"x": 394,
+		"y": 480,
+		"wires": [
+			[
+				"b1aabf54.276fa8",
+				"928844e0.9d04a8"
+			]
+		]
+	},
+	{
+		"id": "70fbeaa3.7bf6dc",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "MSB - Method Call Result Example 3",
+		"info": "",
+		"x": 1202,
+		"y": 440,
+		"wires": []
+	},
+	{
+		"id": "a1bfe394.b2071",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "MSB - IT Interface Method Call Example 3",
+		"info": "",
+		"x": 180,
+		"y": 440,
+		"wires": []
+	},
+	{
+		"id": "e40fb11f.3f24e8",
+		"type": "comment",
+		"z": "5a99113f.6ad25",
+		"name": "MSB - OT OPC UA Method Call Example 3",
+		"info": "",
+		"x": 773,
+		"y": 440,
+		"wires": []
+	},
+	{
+		"id": "b27d0ff7.31b7",
+		"type": "OPCUA-IIoT-Flex-Server",
+		"z": "5a99113f.6ad25",
+		"port": "55381",
+		"endpoint": "",
+		"acceptExternalCommands": true,
+		"maxAllowedSessionNumber": "",
+		"maxConnectionsPerEndpoint": "",
+		"maxAllowedSubscriptionNumber": "",
+		"alternateHostname": "",
+		"name": "",
+		"showStatusActivities": false,
+		"showErrors": false,
+		"allowAnonymous": true,
+		"individualCerts": false,
+		"isAuditing": false,
+		"serverDiscovery": true,
+		"users": [],
+		"xmlsets": [
+			{
+				"name": "AutoID",
+				"path": "c:\\IBM\\Opc.Ua.AutoID.NodeSet2-4-13-2016.xml"
+			}
+		],
+		"publicCertificateFile": "",
+		"privateCertificateFile": "",
+		"registerServerMethod": 1,
+		"discoveryServerEndpointUrl": "",
+		"capabilitiesForMDNS": "",
+		"maxNodesPerRead": 1000,
+		"maxNodesPerBrowse": 2000,
+		"delayToClose": 1000,
+		"addressSpaceScript": "function constructAlarmAddressSpace(server, addressSpace, eventObjects, done) {\n    // server = the created node-opcua server\n    // addressSpace = script placeholder\n    // eventObjects = to hold event variables in memory from this script\n    \n    // internal global sandbox objects are \n    // node = node of the flex server, \n    // coreServer = core iiot server object for debug and access to nodeOPCUA,\n    // and scriptObjects to hold variables and functions\n    const LocalizedText = coreServer.core.nodeOPCUA.LocalizedText\n    const namespace = addressSpace.getOwnNamespace()\n\n    coreServer.internalDebugLog('init dynamic address space')\n    node.warn('construct new address space for OPC UA')\n    \n    let myVariables = addressSpace.addObject({\n        browseName: 'OT OPC UA Test Server',\n        description: 'OPC UA Test Server for the testing of the MSB OT Interfacing',\n        organizedBy: addressSpace.rootFolder.objects,\n        notifierOf: addressSpace.rootFolder.objects.server\n    })\n\n    \n   var method3 = addressSpace.addMethod(\n                myVariables, {\n                    browseName: \"sampleMethodCall\",\n\n                    inputArguments: [\n                        {\n                            name: \"value1\",\n                            description: {text: \"Input value 1 to be added\"},\n                            dataType: \"UInt32\",\n                            arrayType: coreServer.core.nodeOPCUA.VariantArrayType.Scalar\n                        }, {\n                            name: \"value2\",\n                            description: {text: \"Input value 2 to be added\"},\n                            dataType: \"UInt32\",\n                            arrayType: coreServer.core.nodeOPCUA.VariantArrayType.Scalar\n                        }\n                    ],\n\n                    outputArguments: [{\n                        name: \"Sum\",\n                        description: {text: \"Result of the addition\"},\n                        dataType: \"UInt32\",\n                        arrayType: coreServer.core.nodeOPCUA.VariantArrayType.Array,\n                        valueRank: 1\n                    }]\n                });\n\n            method3.bindMethod(function (inputArguments, context, callback) {\n\n                let value1 = inputArguments[0].value\n                let value2 = inputArguments[1].value\n                let resultArray = []\n                \n                resultArray.push(value1+value2);\n\n                let callMethodResult = {\n                    statusCode: coreServer.core.nodeOPCUA.StatusCodes.Good,\n                    outputArguments: [{\n                        dataType: \"UInt32\",\n                        arrayType: coreServer.core.nodeOPCUA.VariantArrayType.Array,\n                        value: resultArray\n                    }]\n                }\n                callback(null, callMethodResult)\n            })\n\n    if(coreServer.core) {\n        namespace.addVariable({\n            componentOf: myVariables,\n            nodeId: 'ns=1;s=TestReadWrite',\n            browseName: 'TestReadWrite',\n            displayName: [\n                new LocalizedText({text: 'Test Read and Write', locale: 'en-US'}),\n                new LocalizedText({text: 'Test Lesen Schreiben', locale: 'de-DE'})\n            ],\n            dataType: 'Double',\n            value: {\n                get: function () {\n                    return new coreServer.core.nodeOPCUA.Variant({\n                        dataType: 'Double',\n                        value: scriptObjects.testReadWrite\n                    })\n                },\n                set: function (variant) {\n                    scriptObjects.testReadWrite = parseFloat(variant.value)\n                    return coreServer.core.nodeOPCUA.StatusCodes.Good\n                }\n            }\n            \n        })\n        \n        addressSpace.addVariable({\n            componentOf: myVariables,\n            nodeId: 'ns=1;s=fbMachine1Temperature',\n            browseName: 'fbMachine1Temperature',\n\t\t\tdisplayName: [\n                new LocalizedText({text: 'OperatingTemperature', locale: 'en-US'}),\n                new LocalizedText({text: 'Arbeitstemperatur', locale: 'de-DE'})\n            ],\n            dataType: 'Double',\n            value: {\n                get: function () {\n                    return new coreServer.core.nodeOPCUA.Variant({\n                        dataType: 'Double',\n                        value: scriptObjects.temperature\n                    })\n                },\n                set: function (variant) {\n                    scriptObjects.temperature = parseFloat(variant.value)\n                    return coreServer.core.nodeOPCUA.StatusCodes.Good\n                }\n            }\n            \n        })\n        \n        let memoryVariable = namespace.addVariable({\n            componentOf: myVariables,\n            nodeId: 'ns=1;s=free_memory',\n            browseName: 'FreeMemory',\n            displayName: [\n                new LocalizedText({text: 'Free Memory', locale: 'en-US'}),\n                new LocalizedText({text: 'ungenutzer RAM', locale: 'de-DE'})\n            ],\n            dataType: 'Double',\n            \n            value: {\n              get: function () {\n                return new coreServer.core.nodeOPCUA.Variant({\n                  dataType: 'Double',\n                  value: coreServer.core.availableMemory()\n                })\n              }\n            }\n        })\n        addressSpace.installHistoricalDataNode(memoryVariable)\n       \n    } else {\n        coreServer.internalDebugLog('coreServer.core needed for coreServer.core.nodeOPCUA')\n    }\n\n\n    done()\n}",
+		"x": 500,
+		"y": 140,
+		"wires": [
+			[]
+		]
+	},
+	{
+		"id": "a2d4e471.c6b46",
+		"type": "debug",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"active": true,
+		"tosidebar": true,
+		"console": false,
+		"tostatus": false,
+		"complete": "false",
+		"x": 830,
+		"y": 160,
+		"wires": []
+	},
+	{
+		"id": "928844e0.9d04a8",
+		"type": "debug",
+		"z": "5a99113f.6ad25",
+		"name": "",
+		"active": true,
+		"tosidebar": true,
+		"console": false,
+		"tostatus": false,
+		"complete": "false",
+		"x": 570,
+		"y": 540,
+		"wires": []
+	}
+]
