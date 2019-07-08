@@ -25,8 +25,8 @@
 		"repeat": "",
 		"crontab": "",
 		"once": false,
-		"x": 180,
-		"y": 160,
+		"x": 140,
+		"y": 180,
 		"wires": [
 			[
 				"9f86a8fc.e916e8"
